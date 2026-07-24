@@ -4,7 +4,7 @@
 
 ## 下载
 
-**exe 下载地址**：https://github.com/aipanini/desktop-blackhole-plus/releases/download/v1.0/DesktopBlackholePlus.exe
+**exe 下载地址**：https://github.com/aipanini/desktop-blackhole-plus/releases/download/v1.1/DesktopBlackholePlus.exe
 
 下载后双击运行即可，无需安装 Python 或任何其他软件。
 
