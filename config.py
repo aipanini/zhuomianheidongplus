@@ -9,7 +9,7 @@ import os
 import sys
 
 # 程序根目录：打包成 exe 后，__file__ 指向临时解压目录，需要用 sys.executable
-if getattr(sys, 'frozen', False):
+if getattr(sys, 'frozen', False) or "__compiled__" in dir(sys.modules.get('__main__', {})):
     _APP_DIR = os.path.dirname(sys.executable)
 else:
     _APP_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -56,6 +56,6 @@ SWALLOW_ENABLED = True        # 是否启用吞噬桌面图标
 SWALLOW_RADIUS = 1.8          # 吞噬触发半径（事件视界的倍数）
 SWALLOW_PATH = os.path.join(_APP_DIR, "资源", "被吞噬")
 SWALLOW_SPEED = 0.15          # 图标被吸引的速度系数
-SWALLOW_COOLDOWN = 2.0        # 吞噬冷却时间（秒），防止连续吞噬
+SWALLOW_COOLDOWN = 0.0        # 吞噬冷却时间（秒），0=经过即吞噬，无需停顿
 SWALLOW_GROWTH_RATE = 0.05    # 每吞噬一个图标，黑洞增大5%
 ICON_RENDER_SIZE = 80         # 吸入动画中图标的渲染大小（像素）

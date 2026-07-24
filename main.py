@@ -37,8 +37,13 @@ import sys
 #   BASE        → exe 所在目录（用于用户数据，如被吞噬文件的存放路径）
 #   _BUNDLE_DIR → 打包资源解压目录（用于只读资源，如着色器、BGM）
 if getattr(sys, 'frozen', False):
+    # PyInstaller 打包
     BASE = os.path.dirname(sys.executable)
     _BUNDLE_DIR = sys._MEIPASS
+elif "__compiled__" in dir(sys.modules.get('__main__', {})):
+    # Nuitka 编译
+    BASE = os.path.dirname(sys.executable)
+    _BUNDLE_DIR = os.path.dirname(os.path.abspath(__file__))
 else:
     BASE = os.path.dirname(os.path.abspath(__file__))
     _BUNDLE_DIR = BASE
@@ -263,6 +268,15 @@ def main():
             if swallow_mgr:
                 swallow_mgr.swallow_path = val
                 os.makedirs(val, exist_ok=True)
+        elif attr == "SWALLOW_SPEED":
+            if swallow_mgr:
+                swallow_mgr.swallow_speed = float(val)
+        elif attr == "SWALLOW_COOLDOWN":
+            if swallow_mgr:
+                swallow_mgr.cooldown = float(val)
+        elif attr == "SWALLOW_RADIUS":
+            if swallow_mgr:
+                swallow_mgr.swallow_radius_mult = float(val)
         elif attr == "STYLE":
             style_val = STYLE_MAP.get(val, 0.0)
         elif attr == "EVENT_HORIZON":

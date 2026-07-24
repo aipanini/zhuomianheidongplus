@@ -512,6 +512,15 @@ input[type="range"]::-moz-range-thumb {
                 <div class="slider-desc">拉入黑洞的速度</div>
             </div>
 
+            <div class="slider-group">
+                <div class="slider-header">
+                    <span class="slider-label">吞噬冷却</span>
+                    <span class="slider-value" id="val-SWALLOW_COOLDOWN">0.0</span>
+                </div>
+                <input type="range" data-attr="SWALLOW_COOLDOWN" min="0" max="5" step="0.1" value="0">
+                <div class="slider-desc">0=经过即吞，无需停顿；越大吞完一个后等待越久</div>
+            </div>
+
             <div class="path-row">
                 <input type="text" class="path-input" id="swallow-path"
                        placeholder="吞噬文件存放路径" value="">
@@ -590,6 +599,7 @@ function formatVal(attr, val) {
     if (attr === 'FOLLOW_DAMPING') return parseFloat(val).toFixed(2);
     if (attr === 'SWALLOW_RADIUS') return parseFloat(val).toFixed(1);
     if (attr === 'SWALLOW_SPEED') return parseFloat(val).toFixed(2);
+    if (attr === 'SWALLOW_COOLDOWN') return parseFloat(val).toFixed(1);
     return val;
 }
 
@@ -719,7 +729,7 @@ setInterval(loadState, 2000);
 _ALLOWED_ATTRS = {
     "EVENT_HORIZON", "EINSTEIN_RADIUS", "WARP_BOOST", "DISK_BRIGHTNESS",
     "STYLE", "FOLLOW_STIFFNESS", "FOLLOW_DAMPING",
-    "SWALLOW_ENABLED", "SWALLOW_RADIUS", "SWALLOW_SPEED", "SWALLOW_PATH",
+    "SWALLOW_ENABLED", "SWALLOW_RADIUS", "SWALLOW_SPEED", "SWALLOW_COOLDOWN", "SWALLOW_PATH",
     "MOUSE_PULL",
 }
 
@@ -831,6 +841,7 @@ class ControlPanel:
             "SWALLOW_ENABLED": bool(c.SWALLOW_ENABLED),
             "SWALLOW_RADIUS": float(c.SWALLOW_RADIUS),
             "SWALLOW_SPEED": float(c.SWALLOW_SPEED),
+            "SWALLOW_COOLDOWN": float(c.SWALLOW_COOLDOWN),
             "SWALLOW_PATH": c.SWALLOW_PATH,
         }
 
